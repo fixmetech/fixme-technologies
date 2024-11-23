@@ -122,7 +122,7 @@ $app->router->post('/service-center-delete-product', [ProductController::class, 
 
 
 /** Admin Routes */
-$app->router->get('/admin-dashboard', [AdminController::class, 'dashboard']);
+$app->router->get('/admin-dashboard', [AdminController::class, 'adminDashboard']);
 
 $app->router->get('/customers', [AdminController::class, 'customers']);
 $app->router->post('/admin/delete-customer', [AdminController::class, 'deleteCustomer']);
