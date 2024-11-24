@@ -41,7 +41,7 @@
                 <input type="date" id="end-date" name="end-date" />
             </div>
             <div class="form-group">
-                <button type="submit">Create Report</button>
+                <button type="submit">Generate Report</button>
             </div>
         </form>
     </div>
