@@ -150,42 +150,6 @@ $app->router->post('/service-centre-sign-up', [AuthController::class, 'serviceCe
 $app->router->get('/service-centre-login', [AuthController::class, 'serviceCentreLogin']);
 $app->router->post('/service-centre-login', [AuthController::class, 'serviceCentreLogin']);
 $app->router->get('/service-center-logout', [AuthController::class, 'serviceCenterLogout']);
-
-
-
-/*routes related to the product(service center)*/
-$app->router->get('/service-center-create-product', [ServiceCentreController::class, 'serviceCenterCreateProduct']);
-$app->router->post('/service-center-create-product', [ProductController::class, 'create']);
-$app->router->get('/market-place-home', [ProductController::class, 'index']);
-$app->router->get('/service-center-create-product', [ProductController::class, 'filterProductsById']);
-$app->router->get('/service-center-update-product', [ProductController::class,'update']);
-$app->router->get('/service-center-update-product', [ServiceCentreController::class, 'update']);
-$app->router->post('/service-center-update-product', [ProductController::class, 'update']);
-$app->router->post('/service-center-delete-product', [ProductController::class, 'delete']);
-
-
-
-/** Admin Routes */
-$app->router->get('/admin-dashboard', [AdminController::class, 'adminDashboard']);
-
-$app->router->get('/customers', [AdminController::class, 'customers']);
-$app->router->post('/admin/delete-customer', [AdminController::class, 'deleteCustomer']);
-
-
-
-$app->router->get('/admin-services', [AdminController::class, 'manageServices']);
-$app->router->post('/admin-services-add', [AdminController::class, 'addService']);
-$app->router->post('/admin-services-edit', [AdminController::class, 'editService']);
-$app->router->post('/admin-services-delete', [AdminController::class, 'deleteService']);
-
-$app->router->get('/admin-reports', [AdminController::class, 'viewReports']);
-$app->router->post('/admin-reports-generate', [AdminController::class, 'generateReport']);
-
-$app->router->post('/admin-settings-update', [AdminController::class, 'updateSettings']);
-
-$app->router->get('/admin-promotions', [AdminController::class, 'promotions']);
-
-
 /* Admin Auth routes */
 $app->router->get('/admin-login', [AuthController::class, 'adminLogin']);
 $app->router->post('/admin-login', [AuthController::class, 'adminLogin']);
