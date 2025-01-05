@@ -25,14 +25,6 @@
         <!-- ======================= Cards ================== -->
         <div class="cardBox">
             <div class="card">
-                <!-- <div>
-                    <div class="numbers">16</div>
-                    <div class="cardName">Active Service Requests</div>
-                </div>
-
-                <div class="iconBx">
-                    <ion-icon name="cog-outline"></ion-icon>
-                </div> -->
             <div class="programming-stats">
             <div class="chart-container">
                 <canvas class="my-chart"></canvas>
