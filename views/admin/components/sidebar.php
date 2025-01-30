@@ -36,6 +36,15 @@
                     <span class="title">Technicians</span>
                 </a>
             </li>
+
+            <li>
+                <a href="/technicians">
+                        <span class="icon">
+                           <ion-icon name = "construct-outline"></ion-icon>
+                        </span>
+                    <span class="title">Service Centre</span>
+                </a>
+            </li>
             
 
             <li>

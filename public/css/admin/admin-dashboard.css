@@ -226,14 +226,15 @@ body {
 
 .cardBox .card {
     position: relative;
-    background: var(--white);
-    padding: 50px;
+    background: #0a9bcc;
+    padding: 10px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    width: 500px;
 }
 
 .cardBox .card .numbers {
@@ -244,14 +245,15 @@ body {
 }
 
 .cardBox .card .cardName {
-    color: var(--black2);
+    color: var(--white);
     font-size: 1.1rem;
     margin-top: 5px;
 }
 
 .cardBox .card .iconBx {
     font-size: 3.5rem;
-    color: var(--black2);
+    color: var(--black);
+    margin-left: 0px;
 }
 
 .cardBox .card:hover {
