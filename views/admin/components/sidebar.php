@@ -38,7 +38,7 @@
             </li>
 
             <li>
-                <a href="/technicians">
+                <a href="/admin-service_centre">
                         <span class="icon">
                            <ion-icon name = "construct-outline"></ion-icon>
                         </span>

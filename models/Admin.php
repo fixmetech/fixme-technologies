@@ -96,6 +96,13 @@ class Admin extends DbModel
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public static function findAllServiceCentres()
+    {
+        $sql = "SELECT ser_cen_id, name, email, phone_no, address, reg_date FROM service_center";
+        $statement = (new Admin)->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
     public static function countTechnicians()
     {
         // Query to count total technicians
