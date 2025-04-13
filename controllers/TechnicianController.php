@@ -13,6 +13,7 @@ use app\models\ServiceCenterReview;
 use app\models\Technician;
 use app\models\TechnicianRequest;
 use app\models\Chat;
+use app\models\TechnicianPaymentMethod;
 
 class TechnicianController extends Controller
 {
@@ -219,11 +220,177 @@ class TechnicianController extends Controller
     public function viewCustomerRequest($id)
     {
         $customer = (new Customer())->findById(intval($id[0]));
+        Application::$app->session->set('customer-destination', $id[0]);
 
         $this->setLayout('auth');
         return $this->render('/technician/customer-request', [
             'customer' => $customer
         ]);
+    }
+
+    public function technicianPaymentMethod()
+    {
+        $request = json_decode(file_get_contents('php://input'), true);
+
+        $bankAccNum = $request['bank_acc_num'] ?? null;
+        $bankAccName = $request['bank_acc_name'] ?? null;
+        $bankAccBranch = $request['bank_acc_branch'] ?? null;
+
+        if (!$bankAccNum || !$bankAccName) {
+            echo json_encode(['success' => false, 'message' => 'Bank account number and name are required.']);
+            exit;
+        }
+
+        $lastFour = substr($bankAccNum, -4);
+
+        $paymentMethod = new TechnicianPaymentMethod();
+        $techId = Application::$app->session->get('technician');
+
+        try {
+            $paymentMethod->addPaymentMethod(
+                $techId,
+                $lastFour,
+                $bankAccNum,
+                $bankAccName,
+                $bankAccBranch
+            );
+
+            // Respond to frontend
+            echo json_encode([
+                'success' => true,
+                'message' => 'Bank account added successfully.',
+                'data' => [
+                    'bank_acc_name' => $bankAccName,
+                    'last_four' => $lastFour,
+                    'bank_acc_branch' => $bankAccBranch,
+                ],
+            ]);
+        } catch (\Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+        exit;
+    }
+
+    /**
+     * Get all bank accounts for the logged-in technician
+     */
+    public function getTechnicianPaymentMethods()
+    {
+        try {
+            $techId = Application::$app->session->get('technician');
+            if (!$techId) {
+                throw new \Exception('Technician not logged in');
+            }
+
+            $paymentMethodModel = new TechnicianPaymentMethod();
+            $paymentMethods = $paymentMethodModel->getPaymentMethods($techId);
+            echo json_encode(['success' => true, 'data' => $paymentMethods]);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Delete a specific bank account
+     *
+     * @param array $id Bank account ID
+     */
+    public function deleteTechnicianPaymentMethod($id)
+    {
+        try {
+            $techId = Application::$app->session->get('technician');
+            $id = intval($id[0]);
+
+            if (!$techId) {
+                throw new \Exception('Technician not logged in');
+            }
+
+            $paymentMethodModel = new TechnicianPaymentMethod();
+            $paymentMethodModel->deletePaymentMethod($id, $techId);
+
+            echo json_encode(['success' => true, 'message' => 'Bank account deleted successfully']);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function getOriginDestination()
+    {
+        $tech_id = Application::$app->session->get('technician');
+        $cus_id = Application::$app->session->get('customer-destination');
+
+        $cus_loc = json_decode((new Customer())->getCustomerLocationUsingId($cus_id));
+        $tech_loc = json_decode((new Technician())->getTechnicianLocationUsingId($tech_id));
+
+        return json_encode(['customer_location' => $cus_loc, 'technician_location' => $tech_loc]);
+    }
+
+    public function getRoute(Request $request)
+    {
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        if (!isset($body['origin'], $body['destination'], $body['mode'])) {
+            throw new \Exception("Missing required parameters: origin, destination, or mode.");
+        }
+
+
+        $origin = $body['origin'];       // Format: "latitude,longitude"
+        $destination = $body['destination']; // Format: "latitude,longitude"
+        $travelMode = strtoupper($body['mode']);     // Example: DRIVING, WALKING, TRANSIT, BICYCLING
+
+        $API_KEY = $_ENV['API_KEY']; // Replace with your actual API key
+
+        $url = "https://routes.googleapis.com/directions/v2:computeRoutes";
+
+        // Build the request JSON for Google's Routes API
+        $routeRequest = [
+            'origin' => [
+                'location' => [
+                    'latLng' => [
+                        'latitude' => floatval(explode(',', $origin)[0]),
+                        'longitude' => floatval(explode(',', $origin)[1])
+                    ]
+                ]
+            ],
+            'destination' => [
+                'location' => [
+                    'latLng' => [
+                        'latitude' => floatval(explode(',', $destination)[0]),
+                        'longitude' => floatval(explode(',', $destination)[1])
+                    ]
+                ]
+            ],
+            'travelMode' => $travelMode, // Can be WALKING, DRIVING, etc.
+            'routingPreference' => 'TRAFFIC_AWARE',
+            'computeAlternativeRoutes' => false,
+            'units' => 'IMPERIAL',
+            'languageCode' => 'en-US',
+        ];
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'X-Goog-Api-Key:' . $_ENV['API_KEY'],
+            'X-Goog-FieldMask: routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline',
+
+        ]);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($routeRequest));
+
+        $response = curl_exec($curl);
+
+        if ($error = curl_error($curl)) {
+            curl_close($curl);
+            return json_encode(['success' => false, 'error' => $error]);
+        }
+
+        curl_close($curl);
+
+        return $response; // JSON response from Routes API
+
     }
 }
 
