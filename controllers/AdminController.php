@@ -14,10 +14,13 @@ class AdminController extends Controller
 {
     public function adminDashboard()
     {
-        $this->setLayout('auth');
-        return $this->render('/admin/dashboard');
-    }
+        // Fetch counts for technicians, customers, and service centers
+        $counts = Admin::countEntities();
 
+        // Set the layout and render the dashboard with counts
+        $this->setLayout('auth');
+        return $this->render('/admin/admin-dashboard', $counts);
+    }
 
     public function manageUsers()
     {
@@ -153,6 +156,16 @@ class AdminController extends Controller
         return $this->render('/admin/technicians', ['technicians' => $technicians]);
 
     }
+    public function serviceCentres()
+    {
+        // Fetch all service centers records
+        $serviceCentres = Admin::findAllServiceCentres();
+        // Render the all the customer in the database
+        $this->setLayout('auth');
+        return $this->render('/admin/admin-service_centre', ['serviceCentres' => $serviceCentres]);
+
+    }
+
 
     public function deleteCustomer(Request $request)
     {

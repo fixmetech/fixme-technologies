@@ -96,6 +96,26 @@ class Admin extends DbModel
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public static function findAllServiceCentres()
+    {
+        $sql = "SELECT ser_cen_id, name, email, phone_no, address, reg_date FROM service_center";
+        $statement = (new Admin)->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public static function countTechnicians()
+    {
+        // Query to count total technicians
+        $sql = "SELECT COUNT(*) AS technicianCount FROM technician";
+        $statement = (new Admin)->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        // Return the count
+        return (int)($result['technicianCount'] ?? 0);
+    }
+
+
 
     public static function deleteCustomerById($cus_id)
     {
@@ -115,6 +135,35 @@ class Admin extends DbModel
         $stmt->bindValue(':tech_id', (int)$tech_id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public static function countEntities()
+{
+    $db = new Admin();
+
+    // Query to count total technicians
+    $sqlTech = "SELECT COUNT(*) AS technicianCount FROM technician";
+    $stmtTech = $db->prepare($sqlTech);
+    $stmtTech->execute();
+    $technicianCount = (int)($stmtTech->fetch(\PDO::FETCH_ASSOC)['technicianCount'] ?? 0);
+
+    // Query to count total customers
+    $sqlCust = "SELECT COUNT(*) AS customerCount FROM customer";
+    $stmtCust = $db->prepare($sqlCust);
+    $stmtCust->execute();
+    $customerCount = (int)($stmtCust->fetch(\PDO::FETCH_ASSOC)['customerCount'] ?? 0);
+
+    // Query to count total service centers
+    $sqlSC = "SELECT COUNT(*) AS serviceCentreCount FROM service_center";
+    $stmtSC = $db->prepare($sqlSC);
+    $stmtSC->execute();
+    $serviceCentreCount = (int)($stmtSC->fetch(\PDO::FETCH_ASSOC)['serviceCentreCount'] ?? 0);
+
+    return [
+        'technicianCount' => $technicianCount,
+        'customerCount' => $customerCount,
+        'serviceCentreCount' => $serviceCentreCount
+    ];
+}
 
 
 }

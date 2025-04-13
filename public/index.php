@@ -148,6 +148,8 @@ $app->router->get('/admin-dashboard', [AdminController::class, 'adminDashboard']
 $app->router->get('/customers', [AdminController::class, 'customers']);
 $app->router->get('/technicians', [AdminController::class, 'technicians']);
 $app->router->post('/admin/delete-technician', [AdminController::class, 'deleteTechnician']);
+$app->router->get('/admin-service_centre', [AdminController::class, 'serviceCentres']);
+$app->router->post('/admin/delete-service-centre', [AdminController::class, 'deleteServiceCentre']);
 $app->router->get('/admin-settings', [AdminController::class, 'adminSettings']);
 $app->router->get('/admin-profile', [AdminController::class, 'adminProfile']);
 $app->router->post('/update-admin-profile', [AdminController::class, 'updateAdminProfile']);
@@ -161,6 +163,7 @@ $app->router->get('/admin-reports', [AdminController::class, 'viewReports']);
 $app->router->post('/admin-reports-generate', [AdminController::class, 'generateReport']);
 $app->router->post('/admin-settings-update', [AdminController::class, 'updateSettings']);
 $app->router->get('/admin-promotions', [AdminController::class, 'promotions']);
+
 
 
 /* Auth routes handled by AuthController */
