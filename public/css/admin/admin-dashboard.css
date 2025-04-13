@@ -215,7 +215,7 @@ body {
 /* ======================= Cards ====================== */
 .cardBox {
 
-    top: 20px;
+    top: 10px;
     position: relative;
     width: 100%;
     padding: 20px;
@@ -227,7 +227,7 @@ body {
 .cardBox .card {
     position: relative;
     background: #0a9bcc;
-    padding: 10px;
+    padding: 5px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
