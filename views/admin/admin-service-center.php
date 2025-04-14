@@ -65,7 +65,7 @@ include_once 'components/header.php';
     </div>
 </div>
 
-<script src="/js/admin/technicians.js"></script>
+<script src="/js/admin/service-center.js"></script>
 <!--    Icons-->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

@@ -22,6 +22,7 @@ class Application
     public Controller $controller;
     public ?DbModel $customer;
     public ?DbModel $serviceCenter;
+    public ?DbModel $admin;
 
     public function __construct($rootPath, array $config)
     {

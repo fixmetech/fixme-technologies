@@ -162,7 +162,7 @@ class AdminController extends Controller
         $serviceCentres = Admin::findAllServiceCentres();
         // Render the all the customer in the database
         $this->setLayout('auth');
-        return $this->render('/admin/admin-service_centre', ['serviceCentres' => $serviceCentres]);
+        return $this->render('/admin/admin-service-center', ['serviceCentres' => $serviceCentres]);
 
     }
 
@@ -200,24 +200,62 @@ class AdminController extends Controller
 
     public function deleteTechnician(Request $request)
     {
-        $data = json_decode(file_get_contents("php://input"), true);
+        // Decode JSON payload manually since getBody() does not handle JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Debug: Log incoming data
+        error_log('Request payload: ' . print_r($data, true));
 
         if (isset($data['tech_id'])) {
             $tech_id = $data['tech_id'];
 
-            // Call model to delete technician
+            // Call the model function to delete the customer
             $result = Admin::deleteTechnicianById($tech_id);
 
             if ($result) {
-                return $response->json(['status' => 'success']);
+                // Debug: Log successful deletion
+                error_log("Customer with ID $tech_id deleted successfully.");
+                echo json_encode(['status' => 'success']);
             } else {
-                return $response->json(['status' => 'error', 'message' => 'Failed to delete technician']);
+                // Debug: Log failure
+                error_log("Failed to delete customer with ID $tech_id.");
+                echo json_encode(['status' => 'error', 'message' => 'Failed to delete customer']);
             }
         } else {
-            return $response->json(['status' => 'error', 'message' => 'Invalid technician ID']);
+            // Debug: Log invalid request
+            error_log("Invalid customer ID in request payload.");
+            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
+        }
+    }       
+
+    public function deleteServiceCenter(Request $request)
+    {
+        // Decode JSON payload manually since getBody() does not handle JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Debug: Log incoming data
+        error_log('Request payload: ' . print_r($data, true));
+
+        if (isset($data['ser_cen_id'])) {
+            $ser_cen_id = $data['ser_cen_id'];
+
+            // Call the model function to delete the customer
+            $result = Admin::deleteServiceCenterById($ser_cen_id);
+
+            if ($result) {
+                // Debug: Log successful deletion
+                error_log("Customer with ID $ser_cen_id deleted successfully.");
+                echo json_encode(['status' => 'success']);
+            } else {
+                // Debug: Log failure
+                error_log("Failed to delete customer with ID $ser_cen_id.");
+                echo json_encode(['status' => 'error', 'message' => 'Failed to delete customer']);
+            }
+        } else {
+            // Debug: Log invalid request
+            error_log("Invalid customer ID in request payload.");
+            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
         }
     }
 
-
 }
-

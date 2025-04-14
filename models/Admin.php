@@ -135,6 +135,14 @@ class Admin extends DbModel
         $stmt->bindValue(':tech_id', (int)$tech_id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
+    public static function deleteServiceCenterById($ser_cen_id)
+    {
+        $db = Application::$app->db; // Database instance
+        $sql = "DELETE FROM service_center WHERE ser_cen_id = :ser_cen_id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':ser_cen_id', (int)$ser_cen_id, \PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 
     public static function countEntities()
 {

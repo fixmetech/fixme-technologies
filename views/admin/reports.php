@@ -24,25 +24,27 @@
             </div>
             
             <div class="form-group">
-                <label for="role">Role</label>
-                <select id="role" name="role">
-                    <option>Select Role</option>
-                    <option>Customer</option>
-                    <option>Technician</option>
-                    <option>Service Centre</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="start-date">Start Date</label>
-                <input type="date" id="start-date" name="start-date" />
-            </div>
-            <div class="form-group">
-                <label for="end-date">End Date</label>
-                <input type="date" id="end-date" name="end-date" />
-            </div>
-            <div class="form-group">
-                <button type="submit">Generate Report</button>
-            </div>
+            <label for="role">Role</label>
+            <select id="role" name="role">
+                <option>Select Role</option>
+                <option>Customer</option>
+                <option>Technician</option>
+                <option>Service Centre</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" name="start-date" />
+        </div>
+        <div class="form-group">
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date" name="end-date" />
+        </div>
+        <div class="form-group">
+            <button type="submit">Generate Report</button>
+        </div>
+    </form>
+</div>
         </form>
     </div>
 </div>

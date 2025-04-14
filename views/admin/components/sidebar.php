@@ -1,4 +1,4 @@
-<!-- Sidebar Technician Home -->
+<!-- Sidebar Admin Home -->
 <div class="container">
     <div class="navigation">
         <ul>
@@ -38,7 +38,7 @@
             </li>
 
             <li>
-                <a href="/admin-service_centre">
+                <a href="/admin-service-center">
                         <span class="icon">
                            <ion-icon name = "construct-outline"></ion-icon>
                         </span>
