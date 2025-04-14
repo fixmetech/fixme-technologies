@@ -124,18 +124,44 @@ function displayRoute(route) {
     const distanceKm = (distanceMeters / 1000).toFixed(2);
     const durationMinutes = Math.ceil(durationSeconds / 60); // Round up to nearest minute
 
+    const baseCost = 500;
+    const distCostPerKm = 50;
+    const timeCostPerHr = 600;
+    let travelCost = baseCost + (distanceKm * distCostPerKm) + ((durationMinutes / 60) * timeCostPerHr);
+    travelCost = travelCost.toFixed(2);
+
     // Select the HTML elements and update their content
     const distanceElement = document.getElementById('travel-distance');
     const timeElement = document.getElementById('travel-time');
 
     distanceElement.textContent = `Distance: ${distanceKm} km`;
     timeElement.textContent = `Time: ${durationMinutes} minutes`;
+    document.getElementById('advance-payment').textContent = `Advance Payment: LKR ${travelCost}`;
 
+    sendAdvancePaymentToBackend(requestId, travelCost);
+
+}
+
+function sendAdvancePaymentToBackend(requestId, advancePayment) {
+    fetch('http://localhost:8080/store-advance-payment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            req_id: requestId,
+            advance_payment: advancePayment,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Advance payment stored successfully.', data);
+        })
+        .catch(error => console.error('Error storing advance payment: ', error));
 }
 
 // travelModeDropdown.addEventListener("change", (e) => {
 //     fetchRoute(e.target.value); // Get new route for selected travel mode
 // });
-
 
 initMap();

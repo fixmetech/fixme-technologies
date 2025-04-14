@@ -26,6 +26,8 @@ include_once 'components/sidebar.php';
 include_once 'components/header.php';
 ?>
 
+<?php $req_id = $_GET['req_id'] ?? null; ?>
+
 <div id="map" style="width: 100%; height: 75vh;">
     <!-- map goes here -->
 </div>
@@ -35,8 +37,11 @@ include_once 'components/header.php';
         <h2 style="font-size: 1.25em; margin-bottom: 10px;">Travel Information</h2>
         <p id="travel-distance" style="font-size: 1em; color: #333; margin-bottom: 5px;">Distance: Calculating...</p>
         <p id="travel-time" style="font-size: 1em; color: #333;">Time: Calculating...</p>
+        <h3 id="advance-payment" style="font-size: 1.1em; color: darkred; font-weight: bold; margin-top: 10px;">Advance
+            Payment: Calculating...</h3>
     </div>
 </div>
+
 
 <!--<div style="margin-top: 20px;">-->
 <!--    <label for="travel-mode">Select Travel Mode:</label>-->
@@ -49,7 +54,6 @@ include_once 'components/header.php';
 <!--</div>-->
 
 
-</body>
 <!-- Overlay for the confirmation message -->
 <div id="signOutOverlay" class="overlay">
     <div class="overlay-content">
@@ -58,6 +62,9 @@ include_once 'components/header.php';
         <button id="cancelSignOut" class="btn">No</button>
     </div>
 </div>
+<script>
+    const requestId = <?= json_encode($req_id) ?>; // id of the request made by customer to tech
+</script>
 <!--    Icons-->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
