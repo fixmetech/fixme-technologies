@@ -56,7 +56,7 @@ include_once 'components/header.php';
     <!-- Modal -->
     <div id="delete-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>Are you sure you want to delete this technician?</h3>
+            <h3>Are you sure you want to delete this service centre?</h3>
             <div class="modal-buttons">
                 <button id="confirm-delete" class="button failure">Yes</button>
                 <button id="cancel-delete" class="button gray">No, cancel</button>
