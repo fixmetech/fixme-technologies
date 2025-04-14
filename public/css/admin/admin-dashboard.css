@@ -218,9 +218,9 @@ body {
     top: 10px;
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2                                                                                                                         , 0.1fr);
     grid-gap: 30px;
 }
 
@@ -240,7 +240,7 @@ body {
 .cardBox .card .numbers {
     position: relative;
     font-weight: 500;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--blue);
 }
 
@@ -251,7 +251,7 @@ body {
 }
 
 .cardBox .card .iconBx {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     color: var(--black);
     margin-left: 0px;
 }

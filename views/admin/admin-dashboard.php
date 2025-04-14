@@ -36,17 +36,17 @@
             </div>
             </div>
 
-            <div class="card">
-            <div>
-                <div class="numbers">
-                <?= htmlspecialchars($technicianCount, ENT_QUOTES, 'UTF-8'); ?> 
+            <!-- <div class="card">
+                <div>
+                    <div class="numbers">
+                    <?= htmlspecialchars($technicianCount, ENT_QUOTES, 'UTF-8'); ?> 
+                    </div>
+                    <div class="cardName">Total Technicians</div>
                 </div>
-                <div class="cardName">Total Technicians</div>
-            </div>
-            <div class="iconBx">
-                <ion-icon name="pencil-outline"></ion-icon>
-            </div>
-        </div>
+                <div class="iconBx">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                </div>
+            </div> -->
 
 
 
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="MainChart">
+        <!-- <div class="MainChart">
 
                 <div class="Chart">
                     <h1>Earnings(Past 12 Months)</h1>
@@ -79,7 +79,7 @@
                 </div>
 
 
-            </div>
+            </div> -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/js/admin/main.js"></script>
         <script src="/js/admin/chart.js"></script>
