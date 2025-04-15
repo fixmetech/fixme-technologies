@@ -8,6 +8,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\Chat;
 use app\models\Comment;
+use app\models\CusTechAdvPayment;
 use app\models\Customer;
 use app\models\Post;
 use app\models\ServiceCenter;
@@ -318,4 +319,105 @@ class CustomerController extends Controller
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+
+    public function getCustomerAdvancePayments()
+    {
+        try {
+            $cus_id = Application::$app->session->get('customer');
+            $advPayModel = new CusTechAdvPayment();
+            $data = $advPayModel->getPendingAdvancePayments($cus_id);
+            return $data;
+
+        } catch (\Exception $e) {
+            http_response_code(500);
+        }
+    }
+
+    public function customerAdvancePayments()
+    {
+        $adv_payments = self::getCustomerAdvancePayments();
+
+        $this->setLayout('auth');
+        return $this->render('/customer/customer-advance-payments', ['adv_payments' => $adv_payments]);
+    }
+
+    public function rejectAdvPaymentUsingReqId($req_id)
+    {
+        $req_id = intval($req_id[0]);
+        (new CusTechAdvPayment())->deleteAdvPaymentUsingReqId($req_id);
+        (new CusTechReq())->deleteCusTechReqUsingReqId($req_id);
+        Application::$app->response->redirect('/customer-advance-payments');
+    }
+
+    public function payHerePaymentProcess()
+    {
+        header('Content-type: application/json');
+
+        try {
+            $jsonData = file_get_contents('php://input');
+            $data = json_decode($jsonData, true);
+
+            $customerId = $data['cus_id'];
+            $technicianId = $data['tech_id'];
+
+            if (!$customerId || !$technicianId) {
+                Application::$app->response->setStatusCode(400);
+                return json_encode(['success' => false, 'error' => 'Missing the required parameter customerId, technicianId']);
+                exit;
+            }
+
+            $cusReq = new CusTechReq();
+            $reqId = $cusReq->getRequestId($customerId, $technicianId);
+            $order_id = $reqId;
+
+            $cusAdvPay = new CusTechAdvPayment();
+            $advancePayment = $cusAdvPay->getAdvancePayment($reqId);
+            $amount = $advancePayment['amount'];
+
+            $custInfo = new Customer();
+            $customer = $custInfo->findById($customerId);
+            $fname = $customer['fname'];
+            $lname = $customer['lname'];
+            $email = $customer['email'];
+            $phone_no = $customer['phone_no'];
+            $address = $customer['address'];
+
+            $merchant_id = $_ENV['MERCHANT_ID'];
+            $merchant_secret = $_ENV['MERCHANT_SECRET'];
+            $currency = "LKR";
+
+            $hash = strtoupper(
+                md5(
+                    $merchant_id .
+                    $order_id .
+                    number_format($amount, 2, '.', '') .
+                    $currency .
+                    strtoupper(md5($merchant_secret))
+                )
+            );
+
+            $array = [];
+            $array["items"] = "Technician Advance Payment";
+            $array["first_name"] = $fname;
+            $array["last_name"] = $lname;
+            $array["email"] = $email;
+            $array["phone"] = $phone_no;
+            $array["address"] = $address;
+//            $array["city"] = "Colombo";
+            $array["country"] = "Sri Lanka";
+            $array["amount"] = $amount;
+            $array["merchant_id"] = $merchant_id;
+            $array["order_id"] = $order_id;
+            $array["currency"] = $currency;
+            $array["hash"] = $hash;
+
+            $jsonObject = json_encode($array);
+
+            echo $jsonObject;
+        } catch (\Exception $e) {
+            Application::$app->response->setStatusCode(500);
+            echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+    
 }
