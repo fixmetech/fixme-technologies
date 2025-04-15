@@ -48,3 +48,34 @@ document.getElementById("confirm-delete").addEventListener("click", () => {
             });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('global-search');
+    const tableBody = document.getElementById('table-body');
+    const originalRows = [...tableBody.querySelectorAll('tr')]; // Store original rows
+
+    // Filter customers based on the search query
+    function filterCustomers(query) {
+        const lowerCaseQuery = query.toLowerCase();
+        tableBody.innerHTML = ''; // Clear the table body
+
+        const filteredRows = originalRows.filter(row => {
+            const cells = row.querySelectorAll('td');
+            return Array.from(cells).some(cell =>
+                cell.textContent.toLowerCase().includes(lowerCaseQuery)
+            );
+        });
+
+        if (filteredRows.length > 0) {
+            filteredRows.forEach(row => tableBody.appendChild(row));
+        } else {
+            tableBody.innerHTML = `<tr><td colspan="8">No customers found.</td></tr>`;
+        }
+    }
+
+    // Add event listener to the search input
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim();
+        filterCustomers(query);
+    });
+});

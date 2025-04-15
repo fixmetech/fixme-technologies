@@ -9,7 +9,7 @@
             <div class="search">
 
                 <label>
-                    <input type="text" placeholder="Search here">
+                    <input type="text" id = "global-search" placeholder="Search here">
                     <ion-icon name="search-outline"></ion-icon>
                 </label>
             </div>
