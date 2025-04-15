@@ -29,15 +29,15 @@ include_once 'components/header.php';
             </tr>
             </thead>
             <tbody id="table-body">
-            <?php if (!empty($serviceCentres)): ?>
-                <?php foreach ($serviceCentres as $serviceCentres): ?>
-                    <tr data-service_Centre-id="<?= htmlspecialchars($serviceCentres['ser_cen_id']) ?>">
-                        <td><?= htmlspecialchars($serviceCentres['ser_cen_id']) ?></td>
-                        <td><?= htmlspecialchars($serviceCentres['name']) ?></td>
-                        <td><?= htmlspecialchars($serviceCentres['email']) ?></td>
-                        <td><?= htmlspecialchars($serviceCentres['phone_no']) ?></td>
-                        <td><?= htmlspecialchars($serviceCentres['address']) ?></td>
-                        <td><?= htmlspecialchars($serviceCentres['reg_date']) ?></td>
+            <?php if (!empty($serviceCenters)): ?>
+                <?php foreach ($serviceCenters as $serviceCenters): ?>
+                    <tr data-service_Centre-id="<?= htmlspecialchars($serviceCenters['ser_cen_id']) ?>">
+                        <td><?= htmlspecialchars($serviceCenters['ser_cen_id']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenters['name']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenters['email']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenters['phone_no']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenters['address']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenters['reg_date']) ?></td>
                         <td>
                             <button class="delete-btn">Delete</button>
                         </td>

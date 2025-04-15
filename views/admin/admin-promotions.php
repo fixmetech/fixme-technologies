@@ -6,110 +6,215 @@
     <title>Admin Promotions Management</title>
     <link rel="stylesheet" href="/css/admin/admin-dashboard.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            line-height: 1.6;
-        }
+       /* General Styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
 
-        .promotions-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+.promotions-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
+.table th {
+    background: linear-gradient(135deg, #4caf50, #81c784); /* Gradient background */
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 15px;
+    text-align: left;
+}
 
-        .table th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-            color: #333;
-        }
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.95rem;
+    color: #333;
+}
 
-        .button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 5px;
-        }
+.table tbody tr:hover {
+    background-color: #f1f8e9; /* Light green hover effect */
+    transition: background-color 0.3s ease;
+}
 
-        .button.success {
-            background-color: #28a745;
-            color: white;
-        }
+.table td:last-child {
+    display: flex;
+    gap: 10px;
+}
 
-        .button.failure {
-            background-color: #dc3545;
-            color: white;
-        }
+/* Button Styles */
+.button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 0.9rem;
+}
 
-        .button.gray {
-            background-color: #6c757d;
-            color: white;
-        }
+.button.success {
+    background-color: #4caf50;
+    color: white;
+}
 
-        .button.update {
-            background-color: #17a2b8;
-            color: white;
-        }
+.button.success:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
 
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+.button.failure {
+    background-color: #e53935;
+    color: white;
+}
 
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+.button.failure:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}
 
-        .modal-form {
-            display: grid;
-            gap: 15px;
-        }
+.button.gray {
+    background-color: #6c757d;
+    color: white;
+}
 
-        .modal-form input, .modal-form textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
+.button.gray:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
 
-        .modal-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+.button.update {
+    background-color: #17a2b8;
+    color: white;
+}
 
-        .hidden {
-            display: none !important;
-        }
+.button.update:hover {
+    background-color: #138496;
+    transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2,
+.modal-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.modal-form {
+    display: grid;
+    gap: 15px;
+}
+
+.modal-form input,
+.modal-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-buttons .confirm {
+    background-color: #4caf50;
+    color: white;
+}
+
+.modal-buttons .confirm:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+.modal-buttons .cancel {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.modal-buttons .cancel:hover {
+    background-color: #bdbdbd;
+    transform: scale(1.05);
+}
+
+/* Create Button */
+.create-button-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.create-button-container .button {
+    font-size: 1rem;
+    padding: 12px 20px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-button-container .button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>

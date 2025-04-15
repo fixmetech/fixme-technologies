@@ -96,7 +96,7 @@ class Admin extends DbModel
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public static function findAllServiceCentres()
+    public static function findAllServiceCenters()
     {
         $sql = "SELECT ser_cen_id, name, email, phone_no, address, reg_date FROM service_center";
         $statement = (new Admin)->prepare($sql);
