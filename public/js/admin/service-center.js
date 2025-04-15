@@ -16,7 +16,6 @@ document.getElementById("cancel-delete").addEventListener("click", () => {
     serviceCenterIdToDelete = null;
 });
 
-// Confirm delete action        
 document.getElementById("confirm-delete").addEventListener("click", () => {
     if (serviceCenterIdToDelete) {
         console.log("Sending request to delete service center ID: ", serviceCenterIdToDelete);
@@ -25,10 +24,11 @@ document.getElementById("confirm-delete").addEventListener("click", () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ser_cen_id: serviceCenterIdToDelete}),
+            body: JSON.stringify({ser_cen_id: serviceCenterIdToDelete }),
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log("Parsed response data:", data);
                 if (data.status === "success") {
                     console.log("Response from server: ", data);
                     // Find and remove the row from the table

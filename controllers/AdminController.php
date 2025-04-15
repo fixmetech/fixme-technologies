@@ -9,6 +9,7 @@ use app\models\Admin;
 use app\models\Customer;
 use app\models\Promotion;
 use app\models\Technician;
+use app\models\ServiceCenter;
 
 class AdminController extends Controller
 {
@@ -244,16 +245,16 @@ class AdminController extends Controller
 
             if ($result) {
                 // Debug: Log successful deletion
-                error_log("Customer with ID $ser_cen_id deleted successfully.");
+                error_log("Service center with ID $ser_cen_id deleted successfully.");
                 echo json_encode(['status' => 'success']);
             } else {
                 // Debug: Log failure
-                error_log("Failed to delete customer with ID $ser_cen_id.");
+                error_log("Failed to delete Service ceter with ID $ser_cen_id.");
                 echo json_encode(['status' => 'error', 'message' => 'Failed to delete customer']);
             }
         } else {
             // Debug: Log invalid request
-            error_log("Invalid customer ID in request payload.");
+            error_log("Invalid Service center ID in request payload.");
             echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
         }
     }
