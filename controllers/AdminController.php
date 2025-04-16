@@ -18,9 +18,11 @@ class AdminController extends Controller
         // Fetch counts for technicians, customers, and service centers
         $counts = Admin::countEntities();
 
+        $requestfromUsers = Admin::requestsFromUser();
+
         // Set the layout and render the dashboard with counts
         $this->setLayout('auth');
-        return $this->render('/admin/admin-dashboard', $counts);
+        return $this->render('/admin/admin-dashboard', $counts, ['requestfromUsers' => $requestfromUsers]);
     }
 
     public function manageUsers()

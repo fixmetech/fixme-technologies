@@ -65,9 +65,9 @@
         <div class="quickActions">
             <h2>Quick Actions</h2>
             <div class="actions">
-                <a href="/admin/add-technician" class="action-btn">Add Technician</a>
-                <a href="/admin/add-customer" class="action-btn">Add Customer</a>
-                <a href="/admin/add-service-center" class="action-btn">Add Service Center</a>
+                <a href="/technicians" class="action-btn">Add Technician</a>
+                <a href="/customers" class="action-btn">Add Customer</a>
+                <a href="/admin-service-center" class="action-btn">Add Service Center</a>
                 <a href="/admin/view-reports" class="action-btn">View Reports</a>
             </div>
         </div>
@@ -76,8 +76,8 @@
         <div class="recentActivities">
             <h2>Recent Activities</h2>
             <ul>
-                <li>Technician John Doe added on <?= date('Y-m-d'); ?></li>
-                <li>Customer Jane Smith registered on <?= date('Y-m-d'); ?></li>
+                <li>Technician John Doe added on <?= htmlspecialchars($serviceCentreCount, ENT_QUOTES, 'UTF-8'); ?></li>
+                <li>Customer Jane Smith registered on <?= htmlspecialchars($requestfromUsers['date'], ENT_QUOTES, 'UTF-8') ?></li>
                 <li>Service Center "FixIt Hub" updated on <?= date('Y-m-d'); ?></li>
                 <li>Earnings report generated for March 2025.</li>
             </ul>

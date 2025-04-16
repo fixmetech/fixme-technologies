@@ -80,6 +80,13 @@ class Admin extends DbModel
             'password',
         ];
     }
+    public static function requestsfromUser()
+    {
+        $sql = "SELECT * FROM cus_tech_req  ORDER BY date DESC  LIMIT 3";
+        $statement = (new Admin)->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
     public static function findAllCustomers()
     {
