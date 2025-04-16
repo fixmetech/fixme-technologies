@@ -30,3 +30,8 @@ async function cancelReq(cusId, techId) {
         console.error('Error: ', e);
     }
 }
+
+async function getAdvancePayments(cusId) {
+    window.location.href = `/customer-advance-payments`;
+}
+

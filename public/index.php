@@ -143,6 +143,8 @@ $app->router->get('/customer-payment-details', [CustomerController::class, 'cust
 $app->router->post('/customer-payment-method', [CustomerController::class, 'customerPaymentMethod']);
 $app->router->get('/get-customer-payment-methods', [CustomerController::class, 'getCustomerPaymentMethods']);
 $app->router->post('/delete-customer-payment-method/{id}', [CustomerController::class, 'deleteCustomerPaymentMethod']);
+$app->router->get('/customer-advance-payments', [CustomerController::class, 'customerAdvancePayments']);
+$app->router->post('/reject-advance-payment/{id}', [CustomerController::class, 'rejectAdvPaymentUsingReqId']);
 
 
 /* Admin Routes */
@@ -252,6 +254,12 @@ $app->router->post('/service-center-profile/fetch-reviews', [ServiceCenterReview
 /* Routes related to the contact us form */
 $app->router->post('/technician-help/send-email', [ContactUsController::class, 'sendEmail']);
 $app->router->post('/service-center-help/send-email', [ContactUsController::class, 'sendEmail']);
+
+/* Routes related to the PayHere Payment gateway */
+$app->router->post('/payhere-payment', [CustomerController::class, 'payHerePaymentProcess']);
+//$app->router->post('/update-payment-status', [CustomerController::class, 'updatePaymentStatus']);
+$app->router->post('/payhere-payment-response', [CustomerController::class, 'paymentResponse']);
+$app->router->get('/get-payhere-details', [CustomerController::class, 'getPayHereDetails']);
 
 /* Run the application */
 $app->run();
