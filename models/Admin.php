@@ -123,5 +123,29 @@ class Admin extends DbModel
         return $stmt->execute();
     }
 
+    public function countTotalTechnicians()
+    {
+        $sql = "SELECT COUNT(*) as total FROM technician";
+        $stmt = self::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function countTotalCustomers()
+    {
+        $sql = "SELECT COUNT(*) as total FROM customer";
+        $stmt = self::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function countTotalServiceCenters()
+    {
+        $sql = "SELECT COUNT(*) as total FROM service_center";
+        $stmt = self::prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    }
 
 }
