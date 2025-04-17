@@ -157,6 +157,7 @@ $app->router->post('/reject-advance-payment/{id}', [CustomerController::class, '
 $app->router->get('/admin-dashboard', [AdminController::class, 'adminDashboard']);
 $app->router->get('/customers', [AdminController::class, 'customers']);
 $app->router->get('/technicians', [AdminController::class, 'technicians']);
+$app->router->get('/admin-service-centre', [AdminController::class, 'serviceCentre']);
 $app->router->post('/admin/delete-technician', [AdminController::class, 'deleteTechnician']);
 $app->router->get('/admin-settings', [AdminController::class, 'adminSettings']);
 $app->router->get('/admin-profile', [AdminController::class, 'adminProfile']);

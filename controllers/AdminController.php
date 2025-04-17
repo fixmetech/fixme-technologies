@@ -143,6 +143,15 @@ class AdminController extends Controller
         return $this->render('/admin/customers', ['customers' => $customers]);
 
     }
+    public function serviceCentre()
+    {
+        // Fetch all service centre records
+        $serviceCentres = Admin::findAllServiceCentres();
+        // Render the all the customer in the database
+        $this->setLayout('auth');
+        return $this->render('/admin/admin-service-centre', ['serviceCentres' => $serviceCentres]);
+
+    }   
 
     public function technicians()
     {

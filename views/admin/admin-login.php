@@ -11,7 +11,7 @@ use app\core\Application;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician Sign Up</title>
+    <title>Admin login</title>
 
     <link rel="stylesheet" href="/css/admin/admin-login.css">
     <link rel="stylesheet" href="/css/base/_reset.css">
@@ -69,6 +69,7 @@ use app\core\Application;
                     <button type="submit" class="btn">Log in</button>
                 </div>
 
+  
             </form>
         </div>
     </div>
