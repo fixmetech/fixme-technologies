@@ -7,17 +7,24 @@ body {
 }
 
 .customers-container {
-    padding: 20px;
+    padding: 60px 0px;
     width: 100%;
     overflow-x: auto;
+    display: flex;
+    left: 300px;
+    top: 70px;
+    margin: 0;
+    border-radius: 0;
+
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 12px;
+    border-radius: 0px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+    left: 320px;
 }
 
 .table th {
@@ -46,7 +53,7 @@ body {
 
 .table th:first-child,
 .table td:first-child {
-    border-top-left-radius: 12px; /* Rounded top-left corner */
+    border-top-left-radius: 0px; /* Rounded top-left corner */
 }
 
 .table th:last-child,

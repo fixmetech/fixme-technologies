@@ -22,7 +22,8 @@ class AdminController extends Controller
 
         // Set the layout and render the dashboard with counts
         $this->setLayout('auth');
-        return $this->render('/admin/admin-dashboard', $counts, ['requestfromUsers' => $requestfromUsers]);
+        $this->setLayout(layout:'header');
+        return $this->render('/admin/admin-dashboard');
     }
 
     public function manageUsers()
@@ -145,7 +146,7 @@ class AdminController extends Controller
         // Fetch all customers records
         $customers = Admin::findAllCustomers();
         // Render the all the customer in the database
-        $this->setLayout('auth');
+        $this->setLayout('header');
         return $this->render('/admin/customers', ['customers' => $customers]);
 
     }
