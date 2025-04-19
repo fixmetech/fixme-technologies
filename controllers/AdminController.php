@@ -22,8 +22,7 @@ class AdminController extends Controller
 
         // Set the layout and render the dashboard with counts
         $this->setLayout('auth');
-        $this->setLayout(layout:'header');
-        return $this->render('/admin/admin-dashboard');
+        return $this->render('/admin/dashboard');
     }
 
     public function manageUsers()
