@@ -8,11 +8,8 @@
     <title>Admin service center management</title>
 </head>
 <body>
+<script src="/js/admin/main.js"></script>
 
-<?php
-include_once 'components/sidebar.php';
-include_once 'components/header.php';
-?>
 <div class="customers-container">
 
     <div id="customers-table">

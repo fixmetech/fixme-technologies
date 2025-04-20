@@ -8,11 +8,7 @@
     <title>Admin Dashboard</title>
 </head>
 <body>
-
-<?php
-include_once 'components/sidebar.php';
-include_once 'components/header.php';
-?>
+<script src="/js/admin/main.js"></script>
 <div class="customers-container">
 
     <div id="customers-table">
@@ -26,6 +22,7 @@ include_once 'components/header.php';
                 <th>Phone Number</th>
                 <th>Address</th>
                 <th>Registered Date</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -39,6 +36,9 @@ include_once 'components/header.php';
                         <td><?= htmlspecialchars($technician['phone_no']) ?></td>
                         <td><?= htmlspecialchars($technician['address']) ?></td>
                         <td><?= htmlspecialchars($technician['reg_date']) ?></td>
+                        <td>
+                            <button class="delete-btn">Delete</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

@@ -12,13 +12,12 @@
 </head>
 
 <body>
-<?php
+
 
 use app\core\Application;
 
-include_once 'components/sidebar.php';
-include_once 'components/header.php';
-?>
+<script src="/js/admin/main.js"></script>
+
 
 <div class="cardBox">
     <a href="/admin-profile">

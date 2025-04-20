@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Promotions Management</title>
-    <link rel="stylesheet" href="/css/admin/admin-dashboard.css">
+    <!-- <link rel="stylesheet" href="/css/admin/admin-dashboard.css"> -->
     <style>
        /* General Styles */
 body {
@@ -13,15 +13,17 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    top: 60px;
 }
 
 .promotions-container {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 60px auto;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    top: 60px;
 }
 
 /* Table Styles */
@@ -32,6 +34,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    top: 100px;
 }
 
 .table th {
@@ -218,8 +221,8 @@ body {
     </style>
 </head>
 <body>
-<?php include_once 'components/sidebar.php';
-include_once 'components/header.php'; ?>
+<script src="/js/admin/main.js"></script>
+
 <div class="promotions-container">
     <div id="promotions-table">
         <table class="table">

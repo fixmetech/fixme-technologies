@@ -21,7 +21,7 @@ class AdminController extends Controller
         $requestfromUsers = Admin::requestsFromUser();
 
         // Set the layout and render the dashboard with counts
-        $this->setLayout('auth');
+        $this->setLayout('header');
         return $this->render('/admin/admin-dashboard');
     }
 
@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function adminSettings()
     {
-        $this->setLayout('auth');
+        $this->setLayout('header');
         return $this->render('/admin/admin-settings');
     }
 
@@ -61,7 +61,7 @@ class AdminController extends Controller
 
     public function viewReports()
     {
-        $this->setLayout('auth');
+        $this->setLayout('header');
         return $this->render('/admin/reports');
     }
 
@@ -80,7 +80,7 @@ class AdminController extends Controller
 
     public function promotions()
     {
-        $this->setLayout('auth');
+        $this->setLayout('header');
         $promotions = Promotion::getAllPromotions();
         return $this->render('/admin/admin-promotions', [
             'promotions' => $promotions
@@ -155,7 +155,7 @@ class AdminController extends Controller
         // Fetch all technicians records
         $technicians = Admin::findAllTechnicians();
         // Render the all the customer in the database
-        $this->setLayout('auth');
+        $this->setLayout('header');
         return $this->render('/admin/technicians', ['technicians' => $technicians]);
 
     }
@@ -164,7 +164,7 @@ class AdminController extends Controller
         // Fetch all service centers records
         $serviceCenters = Admin::findAllServiceCenters();
         // Render the all the customer in the database
-        $this->setLayout('auth');
+        $this->setLayout('header');
         return $this->render('/admin/admin-service-center', ['serviceCenters' => $serviceCenters]);
 
     }

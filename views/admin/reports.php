@@ -10,10 +10,7 @@
         <link rel="stylesheet" href="/css/admin/reports.css">
     </head>
     <body>
-    <?php
-    include_once 'components/sidebar.php';
-    include_once 'components/header.php';
-    ?>
+    <script src="/js/admin/main.js"></script>
     <div class="promotion-container">
     <div class="promotion-form">
         <h2>Create Report</h2>

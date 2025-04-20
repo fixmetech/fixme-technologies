@@ -11,9 +11,9 @@ body {
     width: 100%;
     overflow-x: auto;
     display: flex;
-    left: 300px;
+    left: 250px;
     top: 70px;
-    margin: 0;
+    margin: 20px -30px;
     border-radius: 0;
 
 }
@@ -21,10 +21,10 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 0px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
-    left: 320px;
+    left: 0px;
 }
 
 .table th {

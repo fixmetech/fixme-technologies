@@ -1,6 +1,11 @@
 
+<link rel="stylesheet" href="/css/admin/admin-dashboard.css">
+
+
 <!-- Menu and search -->
     <div class="main">
+
+
         <div class="topbar">
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
