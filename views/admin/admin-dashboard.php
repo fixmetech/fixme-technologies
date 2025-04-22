@@ -19,8 +19,8 @@ use app\models\CusTechReq;
     </head>
     <body>
     <?php
-    // include_once 'components/sidebar.php';
-    // include_once 'components/header.php';
+    include_once 'components/sidebar.php';
+    include_once 'components/header.php';
     ?>
     <!-- JavaScript Files -->
     <script src="/js/admin/main.js"></script>

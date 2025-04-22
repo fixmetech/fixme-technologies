@@ -381,3 +381,10 @@ body {
 .recentActivities ul li:nth-child(even) {
     background-color: #e8f5e9; /* Light green background for even items */
 }
+
+.user-name {
+    position: relative;
+    margin-left: 300px;
+    color: var(--white);
+    font-size: 0.9rem;
+}

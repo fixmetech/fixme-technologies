@@ -1,5 +1,6 @@
-
-<!-- Menu and search -->
+<?php
+use app\core\Application;
+?>
     <div class="main">
         <div class="topbar">
             <div class="toggle">
@@ -14,7 +15,15 @@
                 </label>
             </div>
 
+            <div class="user-account">
+            <h6 class="user-name">
+                <?php
+                $username = strtoupper(Application::$app->admin->{'fname'}) . ' ' . strtoupper(Application::$app->customer->{'lname'});
+                echo $username;
+                ?>
+            </h6>
             <div class="user">
-                <img src="/assets/technician-dashboard/customer03.jpg" alt="">
+                <img src="<?php echo Application::$app->admin->{'profile_picture'} ?>" alt="Profile Pic">
             </div>
+        </div>
         </div>
