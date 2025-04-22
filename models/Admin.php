@@ -98,7 +98,7 @@ class Admin extends DbModel
 
     public static function findAllTechnicians()
     {
-        $sql = "SELECT tech_id, fname, lname, email, phone_no, address, reg_date FROM technician";
+        $sql = "SELECT tech_id, fname, lname, email, phone_no, address, reg_date,status FROM technician";
         $statement = (new Admin)->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -131,43 +131,15 @@ class Admin extends DbModel
         return $stmt->execute();
     }
 
-
-    public static function accessCustomerById($cus_id)
+    public static function updateTechnicianStatus($tech_id, $status)
     {
-        $db = Application::$app->db; // Ensure this points to the correct Database instance
-        $sql = "UPDATE customer SET status = 'Access Denied' WHERE cus_id = :cus_id";
+        $db = Application::$app->db;
+        $sql = "UPDATE technician SET status = :status WHERE tech_id = :tech_id";
         $stmt = $db->prepare($sql);
-        $stmt->bindValue(':cus_id', (int)$cus_id, \PDO::PARAM_INT);
-        return $stmt->execute();
-
-    }
-    public static function accessdeniedById($cus_id)
-    {
-        $db = Application::$app->db; // Ensure this points to the correct Database instance
-        $sql = "UPDATE customer SET status = 'Active' WHERE cus_id = :cus_id";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':cus_id', (int)$cus_id, \PDO::PARAM_INT);
-        return $stmt->execute();
-
-    }
-
-    public static function deleteTechnicianById($tech_id)
-    {
-        $db = Application::$app->db; // Database instance
-        $sql = "DELETE FROM technician WHERE tech_id = :tech_id";
-        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':status', $status, \PDO::PARAM_STR);
         $stmt->bindValue(':tech_id', (int)$tech_id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
-    public static function deleteServiceCenterById($ser_cen_id)
-    {
-        $db = Application::$app->db; // Database instance
-        $sql = "DELETE FROM service_center WHERE ser_cen_id = :ser_cen_id";
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':ser_cen_id', (int)$ser_cen_id, \PDO::PARAM_INT);
-        return $stmt->execute();
-    }
-
     public static function countEntities()
 {
     $db = new Admin();

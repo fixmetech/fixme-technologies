@@ -186,126 +186,26 @@ class AdminController extends Controller
         echo json_encode(['status' => 'error', 'message' => 'Failed to update customer status.']);
     }
 
-
-    public function accessCustomerById(Request $request)
+    public function changeTechnicianStatus(Request $request)
     {
-        // Decode JSON payload manually since getBody() does not handle JSON
         $data = json_decode(file_get_contents('php://input'), true);
+        $tech_id = $data['tech_id'] ?? null;
+        $status = $data['status'] ?? null;
 
-        // Debug: Log incoming data
-        error_log('Request payload: ' . print_r($data, true));
-
-        if (isset($data['cus_id'])) {
-            $cus_id = $data['cus_id'];
-
-            // Call the model function to access the customer
-            $result = Admin::accessCustomerById($cus_id);
-
+        if ($tech_id && $status) {
+            $result = Admin::updateTechnicianStatus($tech_id, $status); // Call the method to update the status
             if ($result) {
-                // Debug: Log successful access
-                error_log("Customer with ID $cus_id accessed successfully.");
-                echo json_encode(['status' => 'success']);
-            } else {
-                // Debug: Log failure
-                error_log("Failed to access customer with ID $cus_id.");
-                echo json_encode(['status' => 'error', 'message' => 'Failed to access customer']);
+                echo json_encode(['status' => 'success', 'message' => 'Technician status updated successfully.']);
+                return;
             }
-        } else {
-            // Debug: Log invalid request
-            error_log("Invalid customer ID in request payload.");
-            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
         }
-    }
 
-    public function accessdeniedById(Request $request): void
-    {
-        // Decode JSON payload manually since getBody() does not handle JSON
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        // Debug: Log incoming data
-        error_log('Request payload: ' . print_r($data, true));
-
-        if (isset($data['cus_id'])) {
-            $cus_id = $data['cus_id'];
-
-            // Call the model function to access the customer
-            $result = Admin::accessdeniedById($cus_id);
-
-            if ($result) {
-                // Debug: Log successful access
-                error_log("Customer with ID $cus_id accessed successfully.");
-                echo json_encode(['status' => 'success']);
-            } else {
-                // Debug: Log failure
-                error_log("Failed to access customer with ID $cus_id.");
-                echo json_encode(['status' => 'error', 'message' => 'Failed to access customer']);
-            }
-        } else {
-            // Debug: Log invalid request
-            error_log("Invalid customer ID in request payload.");
-            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
-        }
-    }
-
-
-    public function deleteTechnician(Request $request)
-    {
-        // Decode JSON payload manually since getBody() does not handle JSON
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        // Debug: Log incoming data
-        error_log('Request payload: ' . print_r($data, true));
-
-        if (isset($data['tech_id'])) {
-            $tech_id = $data['tech_id'];
-
-            // Call the model function to delete the customer
-            $result = Admin::deleteTechnicianById($tech_id);
-
-            if ($result) {
-                // Debug: Log successful deletion
-                error_log("Customer with ID $tech_id deleted successfully.");
-                echo json_encode(['status' => 'success']);
-            } else {
-                // Debug: Log failure
-                error_log("Failed to delete customer with ID $tech_id.");
-                echo json_encode(['status' => 'error', 'message' => 'Failed to delete customer']);
-            }
-        } else {
-            // Debug: Log invalid request
-            error_log("Invalid customer ID in request payload.");
-            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
-        }
-    }       
-
-    public function deleteServiceCenter(Request $request)
-    {
-        // Decode JSON payload manually since getBody() does not handle JSON
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        // Debug: Log incoming data
-        error_log('Request payload: ' . print_r($data, true));
-
-        if (isset($data['ser_cen_id'])) {
-            $ser_cen_id = $data['ser_cen_id'];
-
-            // Call the model function to delete the customer
-            $result = Admin::deleteServiceCenterById($ser_cen_id);
-
-            if ($result) {
-                // Debug: Log successful deletion
-                error_log("Service center with ID $ser_cen_id deleted successfully.");
-                echo json_encode(['status' => 'success']);
-            } else {
-                // Debug: Log failure
-                error_log("Failed to delete Service ceter with ID $ser_cen_id.");
-                echo json_encode(['status' => 'error', 'message' => 'Failed to delete customer']);
-            }
-        } else {
-            // Debug: Log invalid request
-            error_log("Invalid Service center ID in request payload.");
-            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
-        }
+        echo json_encode(['status' => 'error', 'message' => 'Failed to update technician status.']);
     }
 
 }
+    
+
+    
+
+   

@@ -38,6 +38,11 @@ class TechnicianLogin extends Model
             return false;
         }
 
+        if ($technician->status === 'Access Denied') {
+            $this->addError('email', 'Your account access has been denied. Please contact support.');
+            return false;
+        }
+
         return Application::$app->loginTechnician($technician);
     }
 }
