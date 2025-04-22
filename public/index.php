@@ -159,6 +159,7 @@ $app->router->get('/admin-dashboard', [AdminController::class, 'adminDashboard']
 $app->router->get('/customers', [AdminController::class, 'customers']);
 $app->router->post('/customers-status', [AdminController::class, 'changeCustomerStatus']);
 $app->router->post('/technician-status', [AdminController::class,'changeTechnicianStatus']);
+$app->router->post('/service-center-status', [AdminController::class,'changeServiceCenterStatus']);
 $app->router->get('/technicians', [AdminController::class, 'technicians']);
 $app->router->post('/admin/delete-technician', [AdminController::class, 'deleteTechnician']);
 $app->router->get('/admin-service-center', [AdminController::class, 'serviceCenters']);

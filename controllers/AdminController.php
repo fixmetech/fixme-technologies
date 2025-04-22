@@ -203,9 +203,25 @@ class AdminController extends Controller
         echo json_encode(['status' => 'error', 'message' => 'Failed to update technician status.']);
     }
 
+    public function changeServiceCenterStatus(Request $request)
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $ser_cen_id = $data['ser_cen_id'] ?? null;
+        $status = $data['status'] ?? null;
+
+        if ($ser_cen_id && $status) {
+            $result = Admin::updateServiceCenterStatus($ser_cen_id, $status); // Call the method to update the status
+            if ($result) {
+                echo json_encode(['status' => 'success', 'message' => 'Service center status updated successfully.']);
+                return;
+            }
+        }
+
+        echo json_encode(['status' => 'error', 'message' => 'Failed to update service center status.']);
+
+    }
+    
+
+    
+
 }
-    
-
-    
-
-   

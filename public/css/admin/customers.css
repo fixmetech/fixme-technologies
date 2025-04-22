@@ -70,7 +70,7 @@ body {
 }
 
 /* Delete Button */
-.delete-btn {
+.status-btn {
     padding: 8px 16px;
     cursor: pointer;
     color: white;
@@ -105,7 +105,7 @@ body {
 }
 
 .modal-content {
-    background: white;
+    background: rgb(130, 186, 231);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -144,6 +144,6 @@ body {
 }
 
 .modal-content button.cancel:hover {
-    background-color: #bdbdbd; /* Darker gray on hover */
+    background-color: #b4abab; /* Darker gray on hover */
     transform: scale(1.05);
 }

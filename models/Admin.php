@@ -105,7 +105,7 @@ class Admin extends DbModel
     }
     public static function findAllServiceCenters()
     {
-        $sql = "SELECT ser_cen_id, name, email, phone_no, address, reg_date FROM service_center";
+        $sql = "SELECT ser_cen_id, name, email, phone_no, address, reg_date, status FROM service_center";
         $statement = (new Admin)->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -138,6 +138,16 @@ class Admin extends DbModel
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':status', $status, \PDO::PARAM_STR);
         $stmt->bindValue(':tech_id', (int)$tech_id, \PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public static function updateServiceCenterStatus($ser_cen_id, $status)
+    {
+        $db = Application::$app->db;
+        $sql = "UPDATE service_center SET status = :status WHERE ser_cen_id = :ser_cen_id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':status', $status, \PDO::PARAM_STR);
+        $stmt->bindValue(':ser_cen_id', (int)$ser_cen_id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
     public static function countEntities()

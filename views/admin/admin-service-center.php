@@ -27,16 +27,18 @@
             </thead>
             <tbody id="table-body">
             <?php if (!empty($serviceCenters)): ?>
-                <?php foreach ($serviceCenters as $serviceCenters): ?>
+                <?php foreach ($serviceCenters as $serviceCenter): ?>
                     <tr data-service_Centre-id="<?= htmlspecialchars($serviceCenters['ser_cen_id']) ?>">
-                        <td><?= htmlspecialchars($serviceCenters['ser_cen_id']) ?></td>
-                        <td><?= htmlspecialchars($serviceCenters['name']) ?></td>
-                        <td><?= htmlspecialchars($serviceCenters['email']) ?></td>
-                        <td><?= htmlspecialchars($serviceCenters['phone_no']) ?></td>
-                        <td><?= htmlspecialchars($serviceCenters['address']) ?></td>
-                        <td><?= htmlspecialchars($serviceCenters['reg_date']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenter['ser_cen_id']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenter['name']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenter['email']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenter['phone_no']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenter['address']) ?></td>
+                        <td><?= htmlspecialchars($serviceCenter['reg_date']) ?></td>
                         <td>
-                            <button class="delete-btn">Delete</button>
+                        <button class="status-btn" data-status="<?= htmlspecialchars($serviceCenter['status']) ?>">
+                                <?= htmlspecialchars($serviceCenter['status']) ?>
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -51,12 +53,12 @@
     </div>
 
     <!-- Modal -->
-    <div id="delete-modal" class="modal hidden">
+    <div id="status-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>Are you sure you want to delete this service centre?</h3>
+            <h3 id="modal-text">Are you sure you want to change this service-center's status?</h3>
             <div class="modal-buttons">
-                <button id="confirm-delete" class="button failure">Yes</button>
-                <button id="cancel-delete" class="button gray">No, cancel</button>
+                <button id="confirm-status-change" class="button failure">Yes</button>
+                <button id="cancel-status-change" class="button gray">No, cancel</button>
             </div>
         </div>
     </div>
