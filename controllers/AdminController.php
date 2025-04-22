@@ -168,9 +168,26 @@ class AdminController extends Controller
         return $this->render('/admin/admin-service-center', ['serviceCenters' => $serviceCenters]);
 
     }
+    
+    public function changeCustomerStatus(Request $request)
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $cus_id = $data['cus_id'] ?? null;
+        $status = $data['status'] ?? null;
+
+        if ($cus_id && $status) {
+            $result = Admin::updateCustomerStatus($cus_id, $status); // Call the method to update the status
+            if ($result) {
+                echo json_encode(['status' => 'success', 'message' => 'Customer status updated successfully.']);
+                return;
+            }
+        }
+
+        echo json_encode(['status' => 'error', 'message' => 'Failed to update customer status.']);
+    }
 
 
-    public function deleteCustomer(Request $request)
+    public function accessCustomerById(Request $request)
     {
         // Decode JSON payload manually since getBody() does not handle JSON
         $data = json_decode(file_get_contents('php://input'), true);
@@ -181,17 +198,47 @@ class AdminController extends Controller
         if (isset($data['cus_id'])) {
             $cus_id = $data['cus_id'];
 
-            // Call the model function to delete the customer
-            $result = Admin::deleteCustomerById($cus_id);
+            // Call the model function to access the customer
+            $result = Admin::accessCustomerById($cus_id);
 
             if ($result) {
-                // Debug: Log successful deletion
-                error_log("Customer with ID $cus_id deleted successfully.");
+                // Debug: Log successful access
+                error_log("Customer with ID $cus_id accessed successfully.");
                 echo json_encode(['status' => 'success']);
             } else {
                 // Debug: Log failure
-                error_log("Failed to delete customer with ID $cus_id.");
-                echo json_encode(['status' => 'error', 'message' => 'Failed to delete customer']);
+                error_log("Failed to access customer with ID $cus_id.");
+                echo json_encode(['status' => 'error', 'message' => 'Failed to access customer']);
+            }
+        } else {
+            // Debug: Log invalid request
+            error_log("Invalid customer ID in request payload.");
+            echo json_encode(['status' => 'error', 'message' => 'Invalid customer ID']);
+        }
+    }
+
+    public function accessdeniedById(Request $request): void
+    {
+        // Decode JSON payload manually since getBody() does not handle JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Debug: Log incoming data
+        error_log('Request payload: ' . print_r($data, true));
+
+        if (isset($data['cus_id'])) {
+            $cus_id = $data['cus_id'];
+
+            // Call the model function to access the customer
+            $result = Admin::accessdeniedById($cus_id);
+
+            if ($result) {
+                // Debug: Log successful access
+                error_log("Customer with ID $cus_id accessed successfully.");
+                echo json_encode(['status' => 'success']);
+            } else {
+                // Debug: Log failure
+                error_log("Failed to access customer with ID $cus_id.");
+                echo json_encode(['status' => 'error', 'message' => 'Failed to access customer']);
             }
         } else {
             // Debug: Log invalid request

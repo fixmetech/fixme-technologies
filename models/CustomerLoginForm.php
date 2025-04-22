@@ -39,6 +39,10 @@ class CustomerLoginForm extends Model
             return false;
         }
 
+        if ($customer->status === 'Access Denied') {
+            $this->addErrorMessage('email', 'Your account access has been denied. Please contact support.');
+            return false;
+        }
         show($customer);
 
         return Application::$app->loginCustomer($customer);

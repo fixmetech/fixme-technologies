@@ -90,7 +90,7 @@ class Admin extends DbModel
 
     public static function findAllCustomers()
     {
-        $sql = "SELECT cus_id, fname, lname, email, phone_no, address, reg_date FROM customer";
+        $sql = "SELECT cus_id, fname, lname, email, phone_no, address, reg_date,status FROM customer";
         $statement = (new Admin)->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -121,13 +121,30 @@ class Admin extends DbModel
         // Return the count
         return (int)($result['technicianCount'] ?? 0);
     }
+    public static function updateCustomerStatus($cus_id, $status)
+    {
+        $db = Application::$app->db;
+        $sql = "UPDATE customer SET status = :status WHERE cus_id = :cus_id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':status', $status, \PDO::PARAM_STR);
+        $stmt->bindValue(':cus_id', (int)$cus_id, \PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 
 
-
-    public static function deleteCustomerById($cus_id)
+    public static function accessCustomerById($cus_id)
     {
         $db = Application::$app->db; // Ensure this points to the correct Database instance
-        $sql = "DELETE FROM customer WHERE cus_id = :cus_id";
+        $sql = "UPDATE customer SET status = 'Access Denied' WHERE cus_id = :cus_id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':cus_id', (int)$cus_id, \PDO::PARAM_INT);
+        return $stmt->execute();
+
+    }
+    public static function accessdeniedById($cus_id)
+    {
+        $db = Application::$app->db; // Ensure this points to the correct Database instance
+        $sql = "UPDATE customer SET status = 'Active' WHERE cus_id = :cus_id";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':cus_id', (int)$cus_id, \PDO::PARAM_INT);
         return $stmt->execute();

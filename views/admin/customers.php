@@ -28,7 +28,7 @@
                 <th>Phone Number</th>
                 <th>Address</th>
                 <th>Registered Date</th>
-                <th>Actions</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -43,7 +43,9 @@
                         <td><?= htmlspecialchars($customer['address']) ?></td>
                         <td><?= htmlspecialchars($customer['reg_date']) ?></td>
                         <td>
-                            <button class="delete-btn">Delete</button>
+                            <button class="status-btn" data-status="<?= htmlspecialchars($customer['status']) ?>">
+                                <?= htmlspecialchars($customer['status']) ?>
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -57,13 +59,13 @@
         <p id="no-packages-message" style="display: none;">You have no packages yet!</p>
     </div>
 
-    <!-- Modal -->
-    <div id="delete-modal" class="modal hidden">
+   <!-- Modal -->
+    <div id="status-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>Are you sure you want to delete this customer?</h3>
+            <h3 id="modal-text">Are you sure you want to change this customer's status?</h3>
             <div class="modal-buttons">
-                <button id="confirm-delete" class="button failure">Yes</button>
-                <button id="cancel-delete" class="button gray">No, cancel</button>
+                <button id="confirm-status-change" class="button failure">Yes</button>
+                <button id="cancel-status-change" class="button gray">No, cancel</button>
             </div>
         </div>
     </div>
