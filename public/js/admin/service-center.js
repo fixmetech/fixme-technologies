@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".status-btn").forEach((button) => {
         button.addEventListener("click", (event) => {
             const row = event.target.closest("tr");
-            serviceCenterIdUpdate = row.getAttribute("data-service-center-id");
+            serviceCenterIdUpdate = row.getAttribute("data-service_Centre-id");
             const currentStatus = event.target.getAttribute("data-status");
 
             // Determine the new status
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then((data) => {
                     if (data.status === "success") {
                         // Update the status in the table
-                        const row = document.querySelector(`tr[data-service-center-id="${serviceCenterIdUpdate}"]`);
+                        const row = document.querySelector(`tr[data-service_Centre-id="${serviceCenterIdUpdate}"]`);
                         const statusButton = row.querySelector(".status-btn");
                         statusButton.textContent = newStatus;
                         statusButton.setAttribute("data-status", newStatus);

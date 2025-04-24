@@ -28,7 +28,7 @@
             <tbody id="table-body">
             <?php if (!empty($serviceCenters)): ?>
                 <?php foreach ($serviceCenters as $serviceCenter): ?>
-                    <tr data-service_Centre-id="<?= htmlspecialchars($serviceCenters['ser_cen_id']) ?>">
+                    <tr data-service_Centre-id="<?= htmlspecialchars($serviceCenter['ser_cen_id']) ?>">
                         <td><?= htmlspecialchars($serviceCenter['ser_cen_id']) ?></td>
                         <td><?= htmlspecialchars($serviceCenter['name']) ?></td>
                         <td><?= htmlspecialchars($serviceCenter['email']) ?></td>

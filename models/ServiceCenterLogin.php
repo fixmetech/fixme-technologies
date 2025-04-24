@@ -37,6 +37,11 @@ class ServiceCenterLogin extends Model
             return false;
         }
 
+        if ($service_center->status == 'Access Denied') {
+            $this->addErrorMessage('email', 'Your account access has been denied. Please contact support.');
+            return false;
+        }
+
         return Application::$app->loginServiceCenter($service_center);
     }
 }

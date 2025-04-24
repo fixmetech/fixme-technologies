@@ -207,6 +207,7 @@ class AdminController extends Controller
     {
         $data = json_decode(file_get_contents('php://input'), true);
         $ser_cen_id = $data['ser_cen_id'] ?? null;
+        error_log("service cneter id: ", print_r($ser_cen_id, true));
         $status = $data['status'] ?? null;
 
         if ($ser_cen_id && $status) {
