@@ -8,7 +8,7 @@ async function loadMap() {
     let centerLat = 0;
     let centerLng = 0;
 
-    await fetch('http://localhost:8080/customer-location')
+    await fetch('http://152.42.255.40/customer-location')
         .then(response => response.json())
         .then(custLocation => {
             centerLat = parseFloat(custLocation.latitude);
