@@ -1,6 +1,6 @@
 function viewRequest(customerId, req_id = null) {
     /* Redirect to the customer request page */
-    fetch('http://localhost:8080/mark-request-viewed', {
+    fetch('http://152.42.255.40/mark-request-viewed', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
