@@ -1,5 +1,5 @@
 async function getOriginDestination() {
-    const response = await fetch('http://localhost:8080/get-origin-destination');
+    const response = await fetch('http://152.42.255.40/get-origin-destination');
     const locations = await response.json();
 
     const customerCoords = locations.customer_location;

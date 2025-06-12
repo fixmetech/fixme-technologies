@@ -16,7 +16,7 @@ async function sendRequest(technicianId, customerId) {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/cus-tech-req', {
+        const response = await fetch('http://152.42.255.40/cus-tech-req', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
