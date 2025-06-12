@@ -45,7 +45,7 @@ async function loadMap() {
     /* customer marker end */
 
 
-    await fetch('http://localhost:8080/geolocation-technicians')
+    await fetch('http://152.42.255.40/geolocation-technicians')
         .then(response => response.json())
         .then(technicians => {
             console.log(technicians);
@@ -94,7 +94,7 @@ async function loadMap() {
         })
         .catch(error => console.error('Error fetching technician geo co-ordinates: ', error));
 
-    await fetch('http://localhost:8080/geolocation-service-centres')
+    await fetch('http://152.42.255.40/geolocation-service-centres')
         .then(response => response.json())
         .then(serviceCentres => {
             console.log(serviceCentres);
